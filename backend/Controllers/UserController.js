@@ -2,7 +2,7 @@ const geminiResponse = require("../gemini"); // ✅ FIXED
 const moment = require("moment");
 const User = require("../Models/user.models");
 const { uploadOnCloudinary } = require("../Config/cloudinary");
-const moment = require('moment-timezone');
+
 
 exports.getCurrentUser = async (req, res) => {
   try {
