@@ -2,6 +2,7 @@ const geminiResponse = require("../gemini"); // ✅ FIXED
 const moment = require("moment");
 const User = require("../Models/user.models");
 const { uploadOnCloudinary } = require("../Config/cloudinary");
+const moment = require('moment-timezone');
 
 exports.getCurrentUser = async (req, res) => {
   try {
@@ -90,12 +91,14 @@ exports.askToAssistant = async (req, res) => {
           response: `Current date is ${moment().format("YYYY-MM-DD")}`,
         });
 
-    case "get-time":
+case "get-time":
+  const currentTime = moment().tz("Asia/Kolkata").format("hh:mm A"); // or "h:mm A"
   return res.json({
     type,
     userInput,
-    response: `Current time is ${moment().tz("Asia/Kolkata").format("h:mm A")}`
+    response: `Current time is ${currentTime}`
   });
+
 
       case "get-day":
         return res.json({
