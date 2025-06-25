@@ -195,7 +195,7 @@ function Home() {
 
    recognition.onresult = async (e) => {
   const transcript = e.results[e.results.length - 1][0].transcript.trim();
-  console.log('🗣 User said:', transcript);  // 👈 LOG USER INPUT
+  console.log('User said:', transcript);  
   const assistantName = userData?.assistantName?.toLowerCase();
   if (assistantName && transcript.toLowerCase().includes(assistantName)) {
     setaiText('');
@@ -212,7 +212,7 @@ function Home() {
 
       const data = await getGeminiResponse(finalQuery);
       if (data) {
-        console.log('🤖 Assistant responded with:', data.response);  // 👈 LOG GEMINI RESPONSE
+        console.log(' Assistant responded with:', data.response); 
         handleCommand(data);
         setaiText(data.response);
         setuserText('');
