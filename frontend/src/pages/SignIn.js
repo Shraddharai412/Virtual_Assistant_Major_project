@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import bg from '../assests/authBg.png';
+import bg from "../assests/image2.jpg"
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { userdataContext } from '../Contexts/UserContext';
