@@ -92,7 +92,7 @@ exports.askToAssistant = async (req, res) => {
         });
 
 case "get-time":
-  const currentTime = moment().tz("Asia/Kolkata").format("hh:mm A"); // or "h:mm A"
+  const currentTime = moment().format("hh:mm A"); // or "h:mm A"
   return res.json({
     type,
     userInput,
