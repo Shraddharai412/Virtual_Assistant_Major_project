@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: "https://virtualassistant-a8vz.onrender.com",
+  origin: "https://virtual-assistant-major-project.vercel.app",
   credentials: true
 }));
 app.use(express.json());
