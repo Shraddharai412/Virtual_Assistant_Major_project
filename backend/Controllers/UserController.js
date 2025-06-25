@@ -90,13 +90,12 @@ exports.askToAssistant = async (req, res) => {
           response: `Current date is ${moment().format("YYYY-MM-DD")}`,
         });
 
-      case "get-time":
-        return res.json({
-          type,
-          userInput,
-          response: `Current time is ${moment().format("hh:mm A")}`
-
-        });
+    case "get-time":
+  return res.json({
+    type,
+    userInput,
+    response: `Current time is ${moment().tz("Asia/Kolkata").format("h:mm A")}`
+  });
 
       case "get-day":
         return res.json({
