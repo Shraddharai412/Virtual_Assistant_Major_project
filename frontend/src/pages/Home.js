@@ -193,34 +193,36 @@ function Home() {
       if (!isSpeakingRef.current && isMounted) setTimeout(() => startRecognition(), 1000);
     };
 
-    recognition.onresult = async (e) => {
-      const transcript = e.results[e.results.length - 1][0].transcript.trim();
-      const assistantName = userData?.assistantName?.toLowerCase();
-      if (assistantName && transcript.toLowerCase().includes(assistantName)) {
-        setaiText('');
-        setuserText(transcript);
-        recognition.stop();
-        isRecognizingRef.current = false;
-        setListening(false);
-        try {
-          let finalQuery = transcript;
+   recognition.onresult = async (e) => {
+  const transcript = e.results[e.results.length - 1][0].transcript.trim();
+  console.log('🗣 User said:', transcript);  // 👈 LOG USER INPUT
+  const assistantName = userData?.assistantName?.toLowerCase();
+  if (assistantName && transcript.toLowerCase().includes(assistantName)) {
+    setaiText('');
+    setuserText(transcript);
+    recognition.stop();
+    isRecognizingRef.current = false;
+    setListening(false);
+    try {
+      let finalQuery = transcript;
 
-          // Enhance prompts for jokes
-          if (transcript.toLowerCase().includes('joke')) {
-            finalQuery = transcript + '. Tell me a complete joke including punchline.';
-          }
-
-          const data = await getGeminiResponse(finalQuery);
-          if (data) {
-            handleCommand(data);
-            setaiText(data.response);
-            setuserText('');
-          }
-        } catch (err) {
-          console.error('Error in Gemini response:', err);
-        }
+      if (transcript.toLowerCase().includes('joke')) {
+        finalQuery = transcript + '. Tell me a complete joke including punchline.';
       }
-    };
+
+      const data = await getGeminiResponse(finalQuery);
+      if (data) {
+        console.log('🤖 Assistant responded with:', data.response);  // 👈 LOG GEMINI RESPONSE
+        handleCommand(data);
+        setaiText(data.response);
+        setuserText('');
+      }
+    } catch (err) {
+      console.error('Error in Gemini response:', err);
+    }
+  }
+};
+
 
     restartInterval = setInterval(() => {
       if (!isRecognizingRef.current && !isSpeakingRef.current && isMounted) {
