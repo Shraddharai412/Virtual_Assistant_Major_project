@@ -23,6 +23,10 @@ app.use(cookieParser());
 
 app.use("/api/auth", router);
 app.use("/api/user", userrouter);
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
+
 
 // app.get("/" , async(req,res) =>{
 //   let prompt=req.query.prompt
